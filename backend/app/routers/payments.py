@@ -305,7 +305,7 @@ async def get_payment_history(user_id: int = 1, db: Session = Depends(get_db)):
         "payments": [
             {
                 "id": p.id,
-                "amount": p.amount_in r,
+                "amount": p.amount_inr,
                 "currency": p.currency,
                 "status": p.status.value,
                 "plan": p.plan_name,
