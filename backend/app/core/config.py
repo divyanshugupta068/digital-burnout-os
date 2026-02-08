@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     REDIS_ENABLED: bool = bool(os.getenv("REDIS_URL", ""))
     
     # CORS - Dynamic origins based on environment
-    ALLOWED_ORIGINS: str = os.getenv(
+    ALLOWED_ORIGINS: List[str] = os.getenv(
         "ALLOWED_ORIGINS",
         "http://localhost:3000,http://localhost:3001"
     )
@@ -120,8 +120,6 @@ class Settings(BaseSettings):
     
     class Config:
         case_sensitive = True
-        env_file = ".env"
-        env_file_encoding = "utf-8"
 
 
 # Global settings instance
