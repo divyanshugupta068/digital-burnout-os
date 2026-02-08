@@ -2,7 +2,7 @@
 Production-grade database configuration with connection pooling
 """
 
-from sqlalchemy import create_engine, event, exc
+from sqlalchemy import create_engine, event, exc, text
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import NullPool, QueuePool
 import logging
@@ -128,7 +128,7 @@ def check_db_connection() -> bool:
     """
     try:
         with engine.connect() as conn:
-            conn.execute("SELECT 1")
+            conn.execute(text("SELECT 1"))
         logger.info("✅ Database connection healthy")
         return True
     except Exception as e:
