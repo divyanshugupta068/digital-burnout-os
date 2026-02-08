@@ -58,9 +58,8 @@ def create_database_engine():
         def receive_checkout(dbapi_conn, connection_record, connection_proxy):
             """Verify connection is alive on checkout"""
             try:
-                cursor = dbapi_conn.cursor()
-                cursor.execute("SELECT 1")
-                cursor.close()
+                with dbapi_conn.cursor() as cursor:
+                    cursor.execute("SELECT 1")
             except exc.DBAPIError as e:
                 logger.error(f"❌ Bad connection detected, reconnecting: {e}")
                 raise exc.DisconnectionError()
